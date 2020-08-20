@@ -1,12 +1,14 @@
-package com.totvs.teste.testejava.domains;
+package com.totvs.teste.testejava.domain.model;
 
-import com.totvs.teste.testejava.domains.enuns.Tipo;
-import com.totvs.teste.testejava.domains.enuns.TipoLogradouro;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.totvs.teste.testejava.domain.enuns.Tipo;
+import com.totvs.teste.testejava.domain.enuns.TipoLogradouro;
+import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Data
 public class Endereco {
 
     @Id
@@ -22,6 +24,10 @@ public class Endereco {
     private String cidade;
     private String estado;
     private String pais;
+    @ManyToOne
+    @JoinColumn(name = "cod_pessoa")
+    @JsonIgnore
+    private Pessoa pessoa;
 
 
 }

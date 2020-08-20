@@ -1,4 +1,4 @@
-package com.totvs.teste.testejava.domains.enuns;
+package com.totvs.teste.testejava.domain.enuns;
 
 public enum Tipo {
     //(Comercial, Residencial, contato)
