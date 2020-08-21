@@ -1,4 +1,4 @@
-package com.totvs.teste.testejava.domain.enuns;
+package com.totvs.teste.crudpersonapi.domain.enuns;
 
 public enum TipoLogradouro {
     //(Rua, avenida, estrada)
