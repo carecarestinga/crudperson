@@ -60,7 +60,7 @@ SWAGGER<br />
     ]
   }
 ]
-```JSON 
+```
 
   <br />
   *  Criar uma Pessoa<br />
@@ -105,7 +105,7 @@ SWAGGER<br />
     }
   ]
 }
-```JSON
+```
 
  <br />
  
@@ -151,7 +151,7 @@ SWAGGER<br />
     }
   ]
 }
-```JSON
+```
 
 <br />
 
@@ -197,7 +197,7 @@ SWAGGER<br />
     }
   ]
 }
-```JSON
+```
 
 
 
