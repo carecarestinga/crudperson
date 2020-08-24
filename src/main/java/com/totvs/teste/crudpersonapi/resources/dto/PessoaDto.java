@@ -1,11 +1,11 @@
 package com.totvs.teste.crudpersonapi.resources.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
-public class PessoaDto {
+public class PessoaDto implements Serializable {
 
     private Long id;
     private String nome;
@@ -15,7 +15,7 @@ public class PessoaDto {
     private String profissão;
     private BigDecimal salario;
     private List<DependenteDto> dependentes;
-    private LocalDate dataNascimento;
+    private LocalDateTime dataNascimento;
     private List<TelefoneDto> telefones;
 
 
@@ -83,11 +83,11 @@ public class PessoaDto {
         this.dependentes = dependentes;
     }
 
-    public LocalDate getDataNascimento() {
+    public LocalDateTime getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public void setDataNascimento(LocalDateTime dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -97,19 +97,5 @@ public class PessoaDto {
 
     public void setTelefones(List<TelefoneDto> telefones) {
         this.telefones = telefones;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PessoaDto pessoaDto = (PessoaDto) o;
-        return id.equals(pessoaDto.id) &&
-                cpfOuCnpj.equals(pessoaDto.cpfOuCnpj);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, cpfOuCnpj);
     }
 }

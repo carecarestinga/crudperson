@@ -1,21 +1,34 @@
 package com.totvs.teste.crudpersonapi.resources.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.totvs.teste.crudpersonapi.domain.enuns.TipoDependente;
 import com.totvs.teste.crudpersonapi.domain.model.PessoaEntity;
+import java.io.Serializable;
 
-public class DependenteDto {
+public class DependenteDto implements Serializable {
 
-    private String momeCompleto;
+
+//    private Long id_dependente;
+    private String nomeCompleto;
     private TipoDependente tipoDependente;
+    @JsonIgnore
     private PessoaEntity pessoaEntity;
 
 
-    public String getMomeCompleto() {
-        return momeCompleto;
+//    public Long getId_dependente() {
+//        return id_dependente;
+//    }
+//
+//    public void setId_dependente(Long id_dependente) {
+//        this.id_dependente = id_dependente;
+//    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setMomeCompleto(String momeCompleto) {
-        this.momeCompleto = momeCompleto;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public TipoDependente getTipoDependente() {
@@ -33,6 +46,5 @@ public class DependenteDto {
     public void setPessoaEntity(PessoaEntity pessoaEntity) {
         this.pessoaEntity = pessoaEntity;
     }
-
 
 }

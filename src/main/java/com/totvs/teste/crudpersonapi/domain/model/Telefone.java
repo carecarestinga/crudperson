@@ -4,29 +4,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.totvs.teste.crudpersonapi.domain.enuns.Tipo;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Telefone {
+public class Telefone implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_telefone;
     private String codigoPais;
     private String ddd;
     private Integer numero;
     private Tipo tipo;
-//    @ManyToOne
-//    @JoinColumn(name = "cod_pessoa")
-//    @JsonIgnore
-//    private PessoaEntity pessoa;
+    @JsonIgnore
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="telefone_pessoa",
+            joinColumns={@JoinColumn(name="telefone_id",
+                    referencedColumnName="id_telefone")},
+            inverseJoinColumns={@JoinColumn(name="pessoa_id",
+                    referencedColumnName="id")})
+    private PessoaEntity pessoa;
 
-
-    public Long getId() {
-        return id;
+    public Long getId_telefone() {
+        return id_telefone;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_telefone(Long id_telefone) {
+        this.id_telefone = id_telefone;
     }
 
     public String getCodigoPais() {
@@ -61,24 +65,24 @@ public class Telefone {
         this.tipo = tipo;
     }
 
-//    public PessoaEntity getPessoa() {
-//        return pessoa;
-//    }
-//
-//    public void setPessoa(PessoaEntity pessoa) {
-//        this.pessoa = pessoa;
-//    }
+    public PessoaEntity getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(PessoaEntity pessoa) {
+        this.pessoa = pessoa;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Telefone telefone = (Telefone) o;
-        return id.equals(telefone.id);
+        return id_telefone.equals(telefone.id_telefone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id_telefone);
     }
 }

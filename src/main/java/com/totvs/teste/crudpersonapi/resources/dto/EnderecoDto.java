@@ -1,11 +1,15 @@
 package com.totvs.teste.crudpersonapi.resources.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.totvs.teste.crudpersonapi.domain.enuns.Tipo;
 import com.totvs.teste.crudpersonapi.domain.enuns.TipoLogradouro;
 import com.totvs.teste.crudpersonapi.domain.model.PessoaEntity;
+import java.io.Serializable;
 
-public class EnderecoDto {
 
+public class EnderecoDto implements Serializable {
+
+//    private Long id_endereco;
     private Tipo tipo; //(Comercial, Residencial, contato)
     private TipoLogradouro tipoLogradouro; // (Rua, avenida, estrada)
     private String nomeLogradouro;
@@ -16,7 +20,16 @@ public class EnderecoDto {
     private String cidade;
     private String estado;
     private String pais;
+    @JsonIgnore
     private PessoaEntity pessoaEntity;
+//
+//    public Long getId_endereco() {
+//        return id_endereco;
+//    }
+//
+//    public void setId_endereco(Long id_endereco) {
+//        this.id_endereco = id_endereco;
+//    }
 
     public Tipo getTipo() {
         return tipo;
@@ -105,4 +118,5 @@ public class EnderecoDto {
     public void setPessoaEntity(PessoaEntity pessoaEntity) {
         this.pessoaEntity = pessoaEntity;
     }
+
 }

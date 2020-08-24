@@ -1,38 +1,58 @@
 package com.totvs.teste.crudpersonapi.domain.model;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-
 @Entity
 @Table(name = "pessoas")
-public class PessoaEntity {
+public class PessoaEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_pessoa")
-    @SequenceGenerator(name="sequence_pessoa", sequenceName = "sequence_pessoa", allocationSize = 1)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "NOME", length = 100, nullable = false)
+    @Column(length = 100, nullable = false)
     private String nome;
-    @Column(name = "APELIDO", length = 40, nullable = false)
+    @Column(length = 40, nullable = false)
     private String apelido;
     @Column(name = "CPFOUCNPJ")
     private String cpfOuCnpj;
-//    @OneToMany(mappedBy = "pessoa_endereco")
-//    private List<Endereco> enderecos;
-    @Column(name = "PROFISSAO" , length = 40, nullable = false)
+
+    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+    @JoinTable(name="endereco_pessoa",
+            joinColumns={@JoinColumn(name="pessoa_id",
+                    referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="endereco_id",
+                    referencedColumnName="id_endereco")})
+    private List<Endereco> enderecos;
+
+    @Column(length = 40, nullable = false)
     private String profissão;
-    @Column(name = "SALARIO")
+    @Column
     private BigDecimal salario;
-//    @OneToMany(mappedBy = "pessoa_dependente")
-//    private List<Dependente> dependentes;
-    @Column(name = "DATA_NASCIMENTO")
+
+    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+    @JoinTable(name="dependente_pessoa",
+            joinColumns={@JoinColumn(name="pessoa_id",
+                    referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="dependente_id",
+                    referencedColumnName="id_dependente")})
+    private List<Dependente> dependentes;
+
+    @Column
     private LocalDateTime dataNascimento;
-//    @OneToMany(mappedBy = "pessoa_telefone")
-//    private List<Telefone> telefones;
+
+    @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+    @JoinTable(name="telefone_pessoa",
+            joinColumns={@JoinColumn(name="pessoa_id",
+                    referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="telefone_id",
+                    referencedColumnName="id_telefone")})
+    private List<Telefone> telefones;
 
 
     public Long getId() {
@@ -67,13 +87,13 @@ public class PessoaEntity {
         this.cpfOuCnpj = cpfOuCnpj;
     }
 
-//    public List<Endereco> getEnderecos() {
-//        return enderecos;
-//    }
-//
-//    public void setEnderecos(List<Endereco> enderecos) {
-//        this.enderecos = enderecos;
-//    }
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 
     public String getProfissão() {
         return profissão;
@@ -91,13 +111,13 @@ public class PessoaEntity {
         this.salario = salario;
     }
 
-//    public List<Dependente> getDependentes() {
-//        return dependentes;
-//    }
-//
-//    public void setDependentes(List<Dependente> dependentes) {
-//        this.dependentes = dependentes;
-//    }
+    public List<Dependente> getDependentes() {
+        return dependentes;
+    }
+
+    public void setDependentes(List<Dependente> dependentes) {
+        this.dependentes = dependentes;
+    }
 
     public LocalDateTime getDataNascimento() {
         return dataNascimento;
@@ -107,13 +127,13 @@ public class PessoaEntity {
         this.dataNascimento = dataNascimento;
     }
 
-//    public List<Telefone> getTelefones() {
-//        return telefones;
-//    }
-//
-//    public void setTelefones(List<Telefone> telefones) {
-//        this.telefones = telefones;
-//    }
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 
     @Override
     public boolean equals(Object o) {

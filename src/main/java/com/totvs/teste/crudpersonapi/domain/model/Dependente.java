@@ -4,35 +4,40 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.totvs.teste.crudpersonapi.domain.enuns.TipoDependente;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Dependente {
+public class Dependente implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    private String momeCompleto;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_dependente;
+    private String nomeCompleto;
     private TipoDependente tipoDependente;
-//    @ManyToOne
-//    @JoinColumn(name = "cod_pessoa")
-//    @JsonIgnore
-//    private PessoaEntity pessoa;
+    @JsonIgnore
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="dependente_pessoa",
+            joinColumns={@JoinColumn(name="dependente_id",
+                    referencedColumnName="id_dependente")},
+            inverseJoinColumns={@JoinColumn(name="pessoa_id",
+                    referencedColumnName="id")})
+    private PessoaEntity pessoa;
 
-    public Long getId() {
-        return id;
+    public Long getId_dependente() {
+        return id_dependente;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_dependente(Long id_dependente) {
+        this.id_dependente = id_dependente;
     }
 
-    public String getMomeCompleto() {
-        return momeCompleto;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setMomeCompleto(String momeCompleto) {
-        this.momeCompleto = momeCompleto;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public TipoDependente getTipoDependente() {
@@ -43,24 +48,24 @@ public class Dependente {
         this.tipoDependente = tipoDependente;
     }
 
-//    public PessoaEntity getPessoa() {
-//        return pessoa;
-//    }
-//
-//    public void setPessoa(PessoaEntity pessoa) {
-//        this.pessoa = pessoa;
-//    }
+    public PessoaEntity getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(PessoaEntity pessoa) {
+        this.pessoa = pessoa;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dependente that = (Dependente) o;
-        return id.equals(that.id);
+        return id_dependente.equals(that.id_dependente);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id_dependente);
     }
 }

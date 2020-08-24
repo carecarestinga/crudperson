@@ -5,14 +5,15 @@ import com.totvs.teste.crudpersonapi.domain.enuns.Tipo;
 import com.totvs.teste.crudpersonapi.domain.enuns.TipoLogradouro;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Endereco {
+public class Endereco implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_endereco;
     private Tipo tipo; //(Comercial, Residencial, contato)
     private TipoLogradouro tipoLogradouro; // (Rua, avenida, estrada)
     private String nomeLogradouro;
@@ -23,17 +24,21 @@ public class Endereco {
     private String cidade;
     private String estado;
     private String pais;
-//    @ManyToOne
-//    @JoinColumn(name = "cod_pessoa")
-//    @JsonIgnore
-//    private PessoaEntity pessoa;
+    @JsonIgnore
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="endereco_pessoa",
+            joinColumns={@JoinColumn(name="endereco_id",
+                    referencedColumnName="id_endereco")},
+            inverseJoinColumns={@JoinColumn(name="pessoa_id",
+                    referencedColumnName="id")})
+    private PessoaEntity pessoa;
 
-    public Long getId() {
-        return id;
+    public Long getId_endereco() {
+        return id_endereco;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_endereco(Long id_endereco) {
+        this.id_endereco = id_endereco;
     }
 
     public Tipo getTipo() {
@@ -116,24 +121,24 @@ public class Endereco {
         this.pais = pais;
     }
 
-//    public PessoaEntity getPessoa() {
-//        return pessoa;
-//    }
-//
-//    public void setPessoa(PessoaEntity pessoa) {
-//        this.pessoa = pessoa;
-//    }
+    public PessoaEntity getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(PessoaEntity pessoa) {
+        this.pessoa = pessoa;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Endereco endereco = (Endereco) o;
-        return id.equals(endereco.id);
+        return id_endereco.equals(endereco.id_endereco);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id_endereco);
     }
 }
