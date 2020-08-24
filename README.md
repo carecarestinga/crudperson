@@ -109,4 +109,100 @@ SWAGGER<br />
 
 ...
 
+ <br />
+  * Buscar uma Pessoa por id<br />
+  * GET
+<a> http://localhost:8080/pessoas/1 <br />
+  
+  ...
+  
+  {
+  "apelido": "string",
+  "cpfOuCnpj": "string",
+  "dataNascimento": "2020-08-24T05:58:45.888Z",
+  "dependentes": [
+    {
+      "nomeCompleto": "string",
+      "tipoDependente": "Esposa"
+    }
+  ],
+  "enderecos": [
+    {
+      "bairro": "string",
+      "cep": "string",
+      "cidade": "string",
+      "complemento": "string",
+      "estado": "string",
+      "nomeLogradouro": "string",
+      "numeroLogradouro": 0,
+      "pais": "string",
+      "tipo": "Comercial",
+      "tipoLogradouro": "Rua"
+    }
+  ],
+  "id": 1,
+  "nome": "string",
+  "profissão": "string",
+  "salario": 0,
+  "telefones": [
+    {
+      "codigoPais": "string",
+      "ddd": "string",
+      "numero": 0,
+      "tipo": "Comercial"
+    }
+  ]
+}
+
+...
+
+<br />
+  * Deletar uma Pessoa por id<br />
+  * DELETE
+<a> http://localhost:8080/pessoas/1 <br />
+  
+  ...
+  
+  {
+  "apelido": "string",
+  "cpfOuCnpj": "string",
+  "dataNascimento": "2020-08-24T05:58:45.888Z",
+  "dependentes": [
+    {
+      "nomeCompleto": "string",
+      "tipoDependente": "Esposa"
+    }
+  ],
+  "enderecos": [
+    {
+      "bairro": "string",
+      "cep": "string",
+      "cidade": "string",
+      "complemento": "string",
+      "estado": "string",
+      "nomeLogradouro": "string",
+      "numeroLogradouro": 0,
+      "pais": "string",
+      "tipo": "Comercial",
+      "tipoLogradouro": "Rua"
+    }
+  ],
+  "id": 1,
+  "nome": "string",
+  "profissão": "string",
+  "salario": 0,
+  "telefones": [
+    {
+      "codigoPais": "string",
+      "ddd": "string",
+      "numero": 0,
+      "tipo": "Comercial"
+    }
+  ]
+}
+
+
+
+
+
 
