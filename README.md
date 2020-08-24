@@ -158,8 +158,9 @@ SWAGGER<br />
 ...
 
 <br />
-* Deletar uma Pessoa por id<br />
-* DELETE
+
+*  Deletar uma Pessoa por id<br />
+*  DELETE
 <a> http://localhost:8080/pessoas/1 <br />
   
   ...
