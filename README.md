@@ -63,8 +63,8 @@ SWAGGER<br />
 
 ... 
   <br />
-  * Criar uma Pessoa<br />
-  * POST
+  *  Criar uma Pessoa<br />
+  *  POST
 <a> http://localhost:8080/pessoas/ <br />
   
   ...
