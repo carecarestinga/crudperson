@@ -16,8 +16,8 @@ SWAGGER<br />
 * listarTodos<br />
 * GET
 <a> http://localhost:8080/pessoas/ <br />
-...
   
+```JSON
 [
   {
     "apelido": "string",
@@ -60,15 +60,14 @@ SWAGGER<br />
     ]
   }
 ]
+```JSON 
 
-... 
   <br />
   *  Criar uma Pessoa<br />
   *  POST
 <a> http://localhost:8080/pessoas/ <br />
   
-  ...
-  
+```JSON
   {
   "apelido": "string",
   "cpfOuCnpj": "string",
@@ -106,8 +105,7 @@ SWAGGER<br />
     }
   ]
 }
-
-...
+```JSON
 
  <br />
  
@@ -115,8 +113,7 @@ SWAGGER<br />
  *  GET
 <a> http://localhost:8080/pessoas/1 <br />
   
-  ...
-  
+```JSON
   {
   "apelido": "string",
   "cpfOuCnpj": "string",
@@ -154,8 +151,7 @@ SWAGGER<br />
     }
   ]
 }
-
-...
+```JSON
 
 <br />
 
@@ -163,8 +159,7 @@ SWAGGER<br />
 *  DELETE
 <a> http://localhost:8080/pessoas/1 <br />
   
-  ...
-  
+```JSON
   {
   "apelido": "string",
   "cpfOuCnpj": "string",
@@ -202,6 +197,7 @@ SWAGGER<br />
     }
   ]
 }
+```JSON
 
 
 
