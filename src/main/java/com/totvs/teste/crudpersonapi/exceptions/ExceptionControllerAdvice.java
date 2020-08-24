@@ -16,8 +16,8 @@ public class ExceptionControllerAdvice {
     private MessageSource messageSource;
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({PessoaNaoEncontrada.class})
-    public ErroDTO handleNotFound(PessoaNaoEncontrada e) {
+    @ExceptionHandler({EntidadeNaoEncontrada.class})
+    public ErroDTO handleNotFound(EntidadeNaoEncontrada e) {
         return new ErroDTO(e.getClass().getSimpleName(), e.getMessage());
     }
 

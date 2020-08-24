@@ -1,5 +1,6 @@
 package com.totvs.teste.crudpersonapi.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -43,7 +44,7 @@ public class PessoaEntity implements Serializable {
                     referencedColumnName="id_dependente")})
     private List<Dependente> dependentes;
 
-    @Column
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime dataNascimento;
 
     @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)

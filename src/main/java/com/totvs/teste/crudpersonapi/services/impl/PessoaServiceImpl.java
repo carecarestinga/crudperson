@@ -1,6 +1,6 @@
 package com.totvs.teste.crudpersonapi.services.impl;
 
-import com.totvs.teste.crudpersonapi.exceptions.PessoaNaoEncontrada;
+import com.totvs.teste.crudpersonapi.exceptions.EntidadeNaoEncontrada;
 import com.totvs.teste.crudpersonapi.domain.model.PessoaEntity;
 import com.totvs.teste.crudpersonapi.domain.repository.PessoaRepository;
 import com.totvs.teste.crudpersonapi.services.PessoaService;
@@ -16,6 +16,7 @@ import java.util.Optional;
 public class PessoaServiceImpl implements PessoaService {
 
     private PessoaRepository pessoaRepository;
+
     @Autowired
     public PessoaServiceImpl(PessoaRepository pessoaRepository) {
         this.pessoaRepository = pessoaRepository;
@@ -27,10 +28,10 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
-    public PessoaEntity buscarPessoaporId(Long id) {
+    public PessoaEntity buscarPessoaPorId(Long id) {
         Optional<PessoaEntity> pessoaSalva = this.pessoaRepository.findById(id);
-        return pessoaSalva.orElseThrow(() -> new PessoaNaoEncontrada(
-                "Pessoa com " +id + "não Encontrada"
+        return pessoaSalva.orElseThrow(() -> new EntidadeNaoEncontrada(
+                "Pessoa com " + id + " não Encontrada"
         ));
     }
 
@@ -39,19 +40,12 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     public void excluirPessoa(Long id) {
-        PessoaEntity pessoaEntityExcluir = buscarPessoaporId(id);
+        PessoaEntity pessoaEntityExcluir = buscarPessoaPorId(id);
         this.pessoaRepository.delete(pessoaEntityExcluir);
     }
 
     public PessoaEntity atualizarPessoa(PessoaEntity pessoaEntityEditada, Long id) {
-        PessoaEntity pessoaEntitySalva = buscarPessoaporId(id);
-        editandoPessoa(pessoaEntityEditada, pessoaEntitySalva);
+        PessoaEntity pessoaEntitySalva = buscarPessoaPorId(id);
         return this.pessoaRepository.save(pessoaEntitySalva);
     }
-
-    private void editandoPessoa(PessoaEntity pessoaEntityEditada, PessoaEntity pessoaEntitySalva) {
-        pessoaEntitySalva
-                .setNome(pessoaEntityEditada.getNome());
-    }
-
 }

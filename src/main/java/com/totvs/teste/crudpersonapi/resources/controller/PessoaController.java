@@ -2,8 +2,11 @@ package com.totvs.teste.crudpersonapi.resources.controller;
 
 import com.totvs.teste.crudpersonapi.domain.model.PessoaEntity;
 import com.totvs.teste.crudpersonapi.exceptions.CPFOUCNPJException;
-import com.totvs.teste.crudpersonapi.exceptions.PessoaNaoEncontrada;
+import com.totvs.teste.crudpersonapi.exceptions.EntidadeNaoEncontrada;
+import com.totvs.teste.crudpersonapi.resources.dto.DependenteDto;
+import com.totvs.teste.crudpersonapi.resources.dto.EnderecoDto;
 import com.totvs.teste.crudpersonapi.resources.dto.PessoaDto;
+import com.totvs.teste.crudpersonapi.resources.dto.TelefoneDto;
 import com.totvs.teste.crudpersonapi.resources.mapper.PessoaMapper;
 import com.totvs.teste.crudpersonapi.services.PessoaService;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+@CrossOrigin()
 @RestController
 @RequestMapping(path = "/pessoas")
 public class PessoaController {
@@ -35,7 +39,7 @@ public class PessoaController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Pessoas encontradas")
     })
-    @GetMapping
+    @GetMapping  @ResponseBody
     public ResponseEntity<List<PessoaEntity>> buscarPessoas(){
         return new ResponseEntity<>(this.pessoaService.listarPessoas(), HttpStatus.OK);
     }
@@ -43,18 +47,18 @@ public class PessoaController {
     @ApiOperation(value = "Busca uma pessoa pelo seu id")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Pessoa encontrada", response = PessoaDto.class),
-            @ApiResponse(code = 404, message = "Pessoa não encontrada", response = PessoaNaoEncontrada.class)
+            @ApiResponse(code = 404, message = "Pessoa não encontrada", response = EntidadeNaoEncontrada.class)
     })
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> buscarPessoaPorId(@PathVariable Long id){
-        return new ResponseEntity<>(this.pessoaService.buscarPessoaporId(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.pessoaService.buscarPessoaPorId(id), HttpStatus.OK);
     }
     @ApiOperation(value = "Cria uma nova pessoa")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Pessoa criada com sucesso", response = PessoaDto.class),
-            @ApiResponse(code = 404, message = "Pessoa não encontrada", response = PessoaNaoEncontrada.class)
+            @ApiResponse(code = 404, message = "Pessoa não encontrada", response = EntidadeNaoEncontrada.class)
     })
-    @PostMapping
+    @PostMapping  @ResponseBody
     public ResponseEntity<?> salvarPessoa(@RequestBody PessoaDto pessoaDto){
         return new ResponseEntity<>(pessoaService.salvarPessoa(
                 pessoaService.salvarPessoa(pessoaMapper.pessoaEntityToPessoaDto(pessoaDto))), HttpStatus.CREATED);
@@ -68,7 +72,7 @@ public class PessoaController {
     @ApiOperation(value = "Exclui uma pessoa pelo seu Id")
     @ApiResponses( {
             @ApiResponse(code = 204, message = "Pessoa removida com sucesso"),
-            @ApiResponse(code = 404, message = "Pessoa não encontrada", response = PessoaNaoEncontrada.class)
+            @ApiResponse(code = 404, message = "Pessoa não encontrada", response = EntidadeNaoEncontrada.class)
     })
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> excluirPessoa(@PathVariable Long id){
@@ -80,15 +84,26 @@ public class PessoaController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Pessoa criada com sucesso", response = PessoaDto.class),
             @ApiResponse(code = 404, message = "CPFOUCNPJ já Existe", response = CPFOUCNPJException.class),
-            @ApiResponse(code = 404, message = "Pessoa não encontrada", response = PessoaNaoEncontrada.class)
+            @ApiResponse(code = 404, message = "Pessoa não encontrada", response = EntidadeNaoEncontrada.class)
     })
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/{id}")  @ResponseBody
     public ResponseEntity<PessoaDto> atualizarPessoa(@RequestBody PessoaDto pessoaDto, @PathVariable Long id)
             throws URISyntaxException {
         PessoaEntity pessoaEditada = pessoaService.atualizarPessoa(pessoaMapper.pessoaEntityToPessoaDto(pessoaDto), id);
         return ResponseEntity.created(new URI("/pessoas/" + pessoaEditada.getId()))
                              .body(pessoaMapper.pessoaDtoToPessoaEntity(pessoaEditada));
+    }
+    @PutMapping("/{id}/endereco/{id_enedereco}") @ResponseBody
+    public ResponseEntity<?> atualizarEndereco(@RequestBody EnderecoDto enderecoDto, @PathVariable Long id){
+        return null;
+    }
+    @PutMapping("/{id}/dependente/{id_dependente}") @ResponseBody
+    public ResponseEntity<?> atualizarDependente(@RequestBody DependenteDto dependenteDto, @PathVariable Long id){
+        return null;
+    }
+    @PutMapping("/{id}/telefone/{id_telefone}") @ResponseBody
+    public ResponseEntity<?> atualizarTelefone(@RequestBody TelefoneDto telefoneDto, @PathVariable Long id){
+        return null;
     }
 
 

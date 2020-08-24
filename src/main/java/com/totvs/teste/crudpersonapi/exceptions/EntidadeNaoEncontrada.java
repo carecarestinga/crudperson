@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class PessoaNaoEncontrada extends RuntimeException {
+public class EntidadeNaoEncontrada extends RuntimeException {
 
-    public PessoaNaoEncontrada(String msg) {
+    public EntidadeNaoEncontrada(String msg) {
         super(msg);
     }
 
